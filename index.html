@@ -2,1235 +2,1231 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WRW | The Main Event for Moving</title>
+<meta name="description" content="WRW is a wrestling-inspired world of walking and running challenges, real medals, digital progress and a community that likes its fitness with a little theatre.">
+<style>
+:root{--navy:#101827;--navy2:#182235;--gold:#c8a45d;--paper:#f5f2ea;--ink:#121722;--muted:#697180;--line:rgba(16,24,39,.14);--shadow:0 24px 70px rgba(16,24,39,.12);--cream:#f5f2ea;--yellow:#c8a45d;--orange:#c8a45d;--blue:#101827;--cyan:#c8a45d}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:var(--cream);color:var(--ink);overflow-x:hidden;padding:0 0 74px;
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:radial-gradient(#111 1px,transparent 1px);background-size:13px 13px;z-index:9999}
+a{text-decoration:none;color:inherit}img{display:block;max-width:100%}
+button{font:inherit}
+.wrap{width:min(1240px,calc(100% - 36px));margin:auto}
 
-<title>The Rattlesnake | Walk Run Wrestle</title>
+/* ===== BROADCAST SHELL ===== */
+header{
+  position:sticky;top:0;z-index:1000;
+  height:76px;background:var(--navy);color:#fff;
+  border-bottom:4px solid var(--yellow);
+}
+.header-inner{height:100%;display:grid;grid-template-columns:180px 1fr auto;align-items:center;gap:18px}
+.logo img{width:128px;filter:brightness(0) invert(1)}
+.channel{
+  display:flex;align-items:center;gap:10px;overflow:hidden;white-space:nowrap;
+  font-size:.68rem;font-weight:950;text-transform:uppercase;letter-spacing:.13em
+}
+.channel:before{content:"";width:9px;height:9px;background:var(--orange);border-radius:50%;box-shadow:0 0 0 5px rgba(255,107,53,.16);flex:none}
+.channel b{color:var(--cyan)}.channel span{color:#aeb7ca}
+.shop-top{
+  border:0;background:var(--orange);color:#fff!important;padding:14px 19px;
+  font-weight:1000;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+  box-shadow:5px 5px 0 #000
+}
+.shop-top:active{transform:translate(3px,3px);box-shadow:2px 2px 0 #000}
+
+/* Left rail */
+.broadcast-rail{
+  position:fixed;left:0;top:76px;bottom:0;width:74px;background:var(--navy);
+  z-index:900;border-right:2px solid rgba(255,255,255,.08);
+  display:flex;flex-direction:column;align-items:center;padding:14px 8px;gap:8px
+}
+.broadcast-rail button{
+  width:54px;height:54px;border:1px solid rgba(255,255,255,.12);background:#121a30;color:#c8d0e1;
+  cursor:pointer;font-size:.58rem;font-weight:1000;text-transform:uppercase;letter-spacing:.04em;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px
+}
+.broadcast-rail button span{font-size:1.05rem}.broadcast-rail button.active{background:var(--blue);color:#fff;border-color:var(--cyan)}
+.rail-live{margin-top:auto;color:var(--orange);font-size:.55rem;font-weight:1000;writing-mode:vertical-rl;letter-spacing:.12em;padding:10px 0}
+
+/* Page system */
+.page{display:none;min-height:calc(100svh - 76px);margin-left:74px;animation:cutIn .25s ease}
+.page.active{display:block}
+@keyframes cutIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
+.kicker{
+  display:inline-flex;align-items:center;gap:7px;color:var(--blue);font-size:.68rem;font-weight:1000;
+  text-transform:uppercase;letter-spacing:.13em;margin-bottom:14px
+}
+.kicker:before{content:"";width:18px;height:4px;background:var(--orange)}
+h1,h2,h3{font-weight:1000;letter-spacing:-.07em;text-transform:uppercase}
+h1{font-size:clamp(4rem,9vw,9.5rem);line-height:.78}
+h1 span,h2 span{color:var(--blue)}
+h2{font-size:clamp(3rem,6vw,6.5rem);line-height:.82}
+h3{font-size:clamp(1.8rem,3.5vw,3.5rem);line-height:.88}
+p{color:#454d5d;font-weight:650;line-height:1.5}
+section{padding:76px 0}
+.section-head{display:flex;justify-content:space-between;gap:28px;align-items:end;margin-bottom:30px}
+.section-head p{max-width:500px}
+
+/* ===== HOME: LIVE BROADCAST ===== */
+.hero{
+  min-height:calc(100svh - 76px);padding:30px 0;
+  background:var(--navy);color:#fff;position:relative;overflow:hidden;
+  border-bottom:5px solid var(--orange)
+}
+.hero:before{
+  content:"WRW // CHANNEL 01";position:absolute;right:-40px;top:28px;
+  color:rgba(255,255,255,.035);font-size:clamp(5rem,15vw,15rem);font-weight:1000;letter-spacing:-.1em;
+  transform:rotate(-6deg);white-space:nowrap
+}
+.hero:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,transparent 49.8%,rgba(255,255,255,.06) 50%,transparent 50.2%),
+             repeating-linear-gradient(0deg,transparent 0,transparent 58px,rgba(255,255,255,.025) 59px)
+}
+.hero-grid{
+  position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:36px;
+  min-height:calc(100svh - 136px);align-items:center
+}
+.hero-copy{padding:38px 0}
+.hero .kicker{color:var(--cyan)}
+.hero h1{max-width:850px;color:#fff}
+.hero h1 span{color:var(--yellow)}
+.hero .lead{
+  margin:28px 0 8px;color:var(--orange);font-size:clamp(1.5rem,3vw,2.5rem);
+  font-weight:1000;text-transform:uppercase;letter-spacing:-.04em
+}
+.hero .hero-sublead{color:#c9d0df;font-size:1.05rem;max-width:670px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{
+  min-height:52px;border:0;padding:0 22px;background:var(--blue);color:#fff!important;
+  font-weight:1000;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;
+  clip-path:polygon(9px 0,100% 0,calc(100% - 9px) 100%,0 100%);
+  box-shadow:6px 6px 0 #050810;transition:.15s
+}
+.btn.secondary{background:var(--cream);color:var(--ink)!important}
+.btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 #050810}
+.quirk-note{
+  display:inline-block;margin-top:16px;padding:8px 12px;background:var(--yellow);color:#111;
+  font-size:.66rem;font-weight:1000;text-transform:uppercase;transform:rotate(-1.5deg)
+}
+.tiny-chaos{font-size:.72rem!important;color:#8994aa!important;margin-top:7px}
+.hero-broadcast{
+  position:absolute;right:26px;top:24px;z-index:10;background:var(--orange);color:#fff;
+  padding:9px 13px;font-size:.62rem;font-weight:1000;text-transform:uppercase;letter-spacing:.1em
+}
+.hero-broadcast i{display:inline-block;width:7px;height:7px;background:#fff;border-radius:50%;margin-right:7px;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.entrance-note{
+  position:absolute;left:-15px;bottom:115px;z-index:9;background:var(--cyan);color:#06101a;
+  padding:11px 14px;font-size:.65rem;font-weight:1000;text-transform:uppercase;transform:rotate(-4deg)
+}
+
+/* Product = TV broadcast object, not card */
+.medal-stack{min-height:680px;position:relative}
+.medal-main{
+  position:absolute;right:5%;top:4%;width:78%;height:65%;z-index:3;overflow:hidden;
+  border:3px solid #fff;background:#171e31;box-shadow:16px 18px 0 var(--blue);
+  transform:rotate(2.5deg)
+}
+.medal-main:before{content:"LIVE FEED";position:absolute;left:14px;top:14px;background:var(--orange);padding:7px 9px;color:#fff;font-size:.58rem;font-weight:1000;z-index:4}
+.medal-main img{width:100%;height:100%;object-fit:cover}
+.mini-medal{
+  position:absolute;width:31%;aspect-ratio:1;z-index:5;overflow:hidden;border:3px solid #fff;
+  background:#111;box-shadow:8px 9px 0 #000
+}
+.mini-a{left:2%;top:8%;transform:rotate(-7deg)}.mini-b{left:0;bottom:8%;transform:rotate(5deg)}
+.mini-medal img{width:100%;height:100%;object-fit:cover}
+.hero-card{
+  position:absolute;right:0;left:13%;bottom:0;z-index:7;background:var(--yellow);color:#111;
+  padding:22px 24px;border-left:8px solid var(--orange);box-shadow:12px 12px 0 #000;transform:rotate(-1deg)
+}
+.hero-card b{display:block;font-size:clamp(1.5rem,3vw,2.7rem);line-height:.9;letter-spacing:-.055em;text-transform:uppercase}
+.hero-card span{display:block;margin-top:10px;color:#30333c;font-weight:700}
+.hero-proof{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.hero-proof span{background:#17213a;border:1px solid #33415f;color:#fff;padding:8px 10px;font-size:.61rem;font-weight:950;text-transform:uppercase}
+
+/* Broadcast strips */
+.arrival-section{background:var(--orange)!important;color:#fff;padding:18px 0!important;border-bottom:3px solid #111}
+.arrival-section h3{font-size:clamp(1.3rem,3vw,2.2rem);color:#fff!important}
+.arrival-section span{color:#fff!important}
+
+/* Event board */
+.events-home{background:var(--paper);padding-top:52px}
+.events-home .section-head:after{
+  content:"ROSTER // OPEN";background:var(--navy);color:#fff;padding:11px 14px;font-size:.62rem;font-weight:1000;letter-spacing:.1em
+}
+.story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.story-card{
+  min-height:470px;position:relative;overflow:hidden;background:#111827;border:0;border-radius:0;
+  box-shadow:var(--shadow);cursor:pointer;clip-path:polygon(0 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,0 100%)
+}
+.story-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.54;transition:.3s}
+.story-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,25,.05),rgba(8,12,25,.95))}
+.story-card:hover img{transform:scale(1.06);opacity:.72}
+.story-card>*{position:relative;z-index:2}
+.story-card .tag{margin:18px;background:var(--orange);color:#fff;padding:7px 10px;font-size:.6rem;font-weight:1000;text-transform:uppercase;letter-spacing:.1em}
+.story-card>div:last-child{position:absolute;left:20px;right:20px;bottom:20px}
+.story-card h3{color:#fff;font-size:clamp(2.3rem,4vw,4rem)}
+.story-rule{color:var(--yellow);font-size:1.45rem;line-height:.95;font-weight:1000;text-transform:uppercase;margin:12px 0}
+.story-card p{color:#fff!important}
+.price-line,.challenge-price,.best-badge,.challenge-best{
+  display:inline-flex;width:max-content;background:#fff;color:#111!important;border:0;
+  padding:7px 10px;border-radius:0;font-size:.6rem;font-weight:1000;text-transform:uppercase;letter-spacing:.05em;margin:9px 0
+}
+.best-badge,.challenge-best{background:var(--cyan)!important}
+.event-cta{display:inline-flex;background:var(--blue);color:#fff!important;padding:11px 14px;font-size:.63rem;font-weight:1000;text-transform:uppercase}
+
+/* Information zones */
+.why-section{background:var(--blue)!important;color:#fff}
+.why-section h2,.why-section p{color:#fff!important}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.why-card{
+  background:transparent;border:0;border-right:1px solid rgba(255,255,255,.28);border-radius:0;
+  box-shadow:none;padding:22px
+}
+.why-card:last-child{border-right:0}.why-card .icon{font-size:2.5rem;margin-bottom:18px}
+.why-card b{display:block;color:var(--yellow);font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;margin-bottom:9px}
+.why-card p{color:#dce4ff!important;font-size:.92rem}
+
+.steps-section{background:var(--yellow)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:3px solid #111;border-bottom:3px solid #111}
+.step{background:transparent;border:0;border-right:2px solid #111;border-radius:0;box-shadow:none;padding:25px 20px;min-height:190px}
+.step:last-child{border-right:0}.step-num{width:45px;height:45px;background:#111;color:var(--yellow);border-radius:0;display:grid;place-items:center;font-weight:1000;margin-bottom:18px}
+.step b{display:block;font-size:.85rem;text-transform:uppercase;margin-bottom:8px}.step p{font-size:.9rem}
+
+/* Reviews / manifesto */
+.talking-section{background:var(--paper)}
+.talking-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.talking-card{
+  min-height:290px;background:#eef0f5;border:2px solid #111;border-radius:0;padding:28px;
+  box-shadow:7px 7px 0 var(--orange)
+}
+.talking-card:nth-child(2){background:var(--navy);color:#fff;box-shadow:7px 7px 0 var(--cyan)}
+.talking-card:nth-child(2) p,.talking-card:nth-child(2) b{color:#fff}
+.talking-card:nth-child(3){background:#fff}
+.talking-card .speech{font-size:2.4rem;margin-bottom:18px}.talking-card b{display:block;color:var(--blue);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:11px}.talking-card p{font-size:1rem}
+.founder-strip{background:var(--navy);color:#fff;text-align:left;position:relative;overflow:hidden}
+.founder-strip h2,.founder-strip p{color:#fff!important}.founder-strip p{max-width:760px;margin-top:18px}.founder-strip .btn{margin-top:24px;background:var(--yellow);color:#111!important}
+
+/* Universe = channel grid */
+.universe-section{background:#10172a;color:#fff;overflow:hidden}
+.universe-section h2{color:#fff}.universe-section p{color:#c9d0df!important}
+.universe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#39435d;border:2px solid #39435d}
+.universe-card{background:#11192e;padding:28px;min-height:290px;border:0;border-radius:0;position:relative;overflow:hidden}
+.universe-card:nth-child(2){background:#17213a}.universe-card:nth-child(3){background:#0e1526}
+.universe-card:after{content:"LIVE";position:absolute;right:-15px;bottom:-20px;color:rgba(255,255,255,.025);font-size:7rem;font-weight:1000}
+.universe-card .universe-tag{display:inline-block;background:var(--orange);color:#fff;border-radius:0;padding:7px 9px;font-size:.6rem;font-weight:1000;text-transform:uppercase;letter-spacing:.1em;margin-bottom:18px}
+.universe-card h3{color:#fff;margin-bottom:12px}.universe-card p{font-size:.92rem}.universe-card b{display:block;color:var(--yellow);font-size:.7rem;text-transform:uppercase;margin-top:15px}
+.news-ticker{margin-top:24px;border-top:2px solid var(--cyan);border-bottom:2px solid var(--cyan);padding:13px 0;overflow:hidden;white-space:nowrap;background:#080d19}
+.news-ticker-track{display:inline-block;white-space:nowrap;animation:tickerMove 18s linear infinite}
+.news-ticker span{display:inline-block;margin-right:42px;color:#dce4ff;font-size:.65rem;font-weight:1000;text-transform:uppercase;letter-spacing:.07em}
+.news-ticker span:before{content:"◆";color:var(--orange);margin-right:18px}
+@keyframes tickerMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* Backstage */
+.backstage{background:var(--cream)}
+.backstage-box{background:#fff;border:3px solid #111;border-radius:0;box-shadow:var(--shadow);padding:clamp(25px,5vw,50px);position:relative}
+.backstage-box:before{content:"PRODUCTION DEPT.";position:absolute;right:18px;top:18px;background:var(--cyan);color:#111;padding:7px 9px;font-size:.58rem;font-weight:1000}
+.backstage-box h3{font-size:clamp(2rem,4vw,4rem)}.backstage-list{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:25px;border-top:2px solid #111}
+.backstage-list div{background:#f3f4f7;border-right:1px solid #bbb;padding:18px;font-weight:900}.backstage-list div:last-child{border-right:0}.backstage-list small{display:block;margin-top:6px;color:#667085;font-weight:650}
+
+/* Other pages */
+.page-title{padding:55px 0;background:var(--navy);color:#fff;border-bottom:5px solid var(--orange);position:relative;overflow:hidden}
+.page-title:after{content:"WRW";position:absolute;right:-15px;bottom:-70px;color:rgba(255,255,255,.04);font-size:15rem;font-weight:1000;letter-spacing:-.1em}
+.page-title h1{color:#fff}.page-title p{color:#cbd3e3!important;max-width:760px;margin-top:20px}
+.challenge-list{display:grid;gap:28px}
+.challenge-card{
+  display:grid;grid-template-columns:.85fr 1.15fr;gap:0;background:var(--paper);
+  border:2px solid #111;border-radius:0;box-shadow:var(--shadow);overflow:hidden
+}
+.challenge-img{min-height:470px;overflow:hidden;background:#111}
+.challenge-img img{width:100%;height:100%;object-fit:cover}
+.challenge-info{padding:clamp(22px,4vw,45px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.challenge-info h2{font-size:clamp(3rem,6vw,6rem)}
+.rule-big{font-size:clamp(2.4rem,5vw,5rem);line-height:.82;font-weight:1000;letter-spacing:-.07em;text-transform:uppercase;margin:20px 0}
+.pills{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0 24px}.pills span{background:#e8eaf0;border:1px solid #cdd1dc;padding:8px 10px;border-radius:0;font-size:.6rem;text-transform:uppercase;font-weight:1000}
+.app-screens{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+.screen-stage{min-height:650px;position:relative}
+.screen{position:absolute;overflow:hidden;border:3px solid #111;border-radius:0;background:#111;box-shadow:10px 12px 0 var(--blue)}
+.screen img{width:100%;height:100%;object-fit:cover}.screen span{position:absolute;left:10px;bottom:10px;background:var(--yellow);color:#111;padding:7px 9px;font-size:.58rem;text-transform:uppercase;font-weight:1000}
+.screen-main{width:58%;height:70%;right:7%;top:4%;transform:rotate(2deg)}.screen-log{width:38%;height:42%;left:0;top:10%;transform:rotate(-4deg)}.screen-cards{width:38%;height:42%;left:7%;bottom:5%;transform:rotate(4deg)}.screen-proof{width:38%;height:42%;right:0;bottom:0;transform:rotate(-3deg)}
+.hub-feature-list{display:grid;gap:10px}.hub-feature{background:#eef0f5;border:2px solid #111;border-radius:0;box-shadow:5px 5px 0 var(--cyan);padding:20px}.hub-feature b{color:var(--blue);font-size:.72rem}.hub-feature strong{display:block;font-size:1.5rem;text-transform:uppercase;margin-bottom:6px}
+.faq-list{display:grid;gap:8px}details{background:#fff;border:2px solid #111;border-radius:0;box-shadow:4px 4px 0 #cdd1dc;overflow:hidden}summary{cursor:pointer;padding:19px 20px;font-weight:1000;text-transform:uppercase;list-style:none;display:flex;justify-content:space-between}summary::-webkit-details-marker{display:none}summary:after{content:"+";color:var(--blue);font-size:1.4rem}details[open] summary:after{content:"–"}details p{padding:0 20px 20px}
+.policy-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.policy-card{background:#fff;border:2px solid #111;border-radius:0;padding:20px;box-shadow:5px 5px 0 #d5d8e1}.policy-card h3{color:var(--blue);font-size:1rem;margin-bottom:8px}
+.community-panel{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center;background:var(--navy);border:0;border-radius:0;padding:clamp(25px,5vw,50px);box-shadow:var(--shadow)}.community-panel h2,.community-panel p{color:#fff!important}.community-points{display:grid;gap:8px}.community-points span{background:#17213a;border:1px solid #34415c;color:#fff;border-radius:0;padding:15px;font-weight:850}
+.finish-cta{background:var(--orange);color:#fff;text-align:center}.finish-cta h2,.finish-cta p{color:#fff!important}.finish-cta h2{font-size:clamp(4rem,9vw,9rem)}.finish-cta .btn{background:var(--navy);box-shadow:7px 7px 0 #fff}
+.drops-hero{background:#12182b;color:#fff;padding:65px 0;border-bottom:5px solid var(--cyan);position:relative;overflow:hidden}.drops-hero h1{color:#fff}.drops-hero h1 span{color:var(--orange)}.drops-hero p{color:#cbd3e3!important;max-width:760px;font-size:1.08rem;margin-top:17px}
+.drops-ticker{display:inline-flex;align-items:center;gap:9px;background:var(--orange);color:#fff;padding:8px 12px;font-size:.62rem;font-weight:1000;text-transform:uppercase;letter-spacing:.09em;margin-bottom:20px}.drops-ticker span{width:7px;height:7px;background:#fff;border-radius:50%;animation:pulse 1s infinite}
+.drops-grid{display:grid;gap:25px}.drops-card{display:grid;grid-template-columns:1fr 1.1fr;gap:0;background:#fff;border:2px solid #111;border-radius:0;box-shadow:var(--shadow);overflow:hidden}.drops-img{position:relative;min-height:440px;background:#111}.drops-img img{width:100%;height:100%;object-fit:cover}.drops-badge{position:absolute;top:18px;left:18px;background:var(--yellow);color:#111;padding:8px 11px;font-size:.58rem;font-weight:1000;text-transform:uppercase}.drops-info{padding:clamp(24px,5vw,48px)}.drops-info h2{font-size:clamp(2.5rem,5vw,5rem)}.drops-info p{margin:14px 0}.drops-price{font-size:2rem;font-weight:1000;margin:16px 0}.drops-price span{text-decoration:line-through;color:#999;font-size:1rem;margin-left:7px}.drops-pills{display:flex;gap:7px;flex-wrap:wrap;margin:20px 0 28px}.drops-pills span{background:#e9ebf1;padding:8px 10px;font-size:.6rem;font-weight:1000;text-transform:uppercase}.drops-rules{background:var(--navy);color:#fff;padding:28px;margin-top:30px}.drops-rules h3{color:var(--yellow);font-size:1.7rem;margin-bottom:10px}.drops-rules p{color:#d5dbea!important}.drops-rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.drops-rule-box{background:#17213a;padding:18px}.drops-rule-box b{display:block;color:var(--cyan);font-size:.72rem;text-transform:uppercase;margin-bottom:6px}
+.reviews-section{background:#e8ebf1;border-top:2px solid #111;border-bottom:2px solid #111}.reviews-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.review-card{background:#fff;border:2px solid #111;border-radius:0;padding:20px;box-shadow:5px 5px 0 var(--cyan)}.review-snippet{min-height:150px;display:flex;flex-direction:column;justify-content:center}.review-snippet:before{content:"“";position:absolute;top:5px;right:12px;font-size:3rem;color:#dfe2eb;font-weight:1000}.review-snippet p{font-size:.98rem}.review-card b{display:block;font-size:1.25rem;line-height:1.05;margin-bottom:10px}.review-source{font-size:.62rem;font-weight:900;text-transform:uppercase;color:#667085}.reviews-note{margin-top:18px;border-top:2px solid #111;padding-top:18px;display:flex;justify-content:space-between;gap:12px}
+.weird-section{background:var(--cream);overflow:hidden}.weird-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.weird-copy{background:var(--navy);color:#fff;padding:clamp(25px,5vw,50px);position:relative;overflow:hidden}.weird-copy h2,.weird-copy p{color:#fff!important}.weird-copy p{margin-top:18px}.weird-list{display:grid;gap:8px;margin-top:22px}.weird-list div{padding:13px 15px;border-left:5px solid var(--orange);background:#17213a;font-weight:800}.confession-stack{display:grid;gap:10px}.confession{padding:24px;background:#fff;border:2px solid #111;box-shadow:5px 5px 0 var(--blue)}.confession b{display:block;color:var(--orange);font-size:.65rem;text-transform:uppercase;margin-bottom:8px}.confession strong{display:block;font-size:1.4rem;line-height:1;margin-bottom:8px}.confession p{font-size:.9rem}
+
+/* Footer */
+footer{margin-left:74px;background:var(--navy);color:#fff;border-top:4px solid var(--yellow);padding:40px 0 110px}.footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:25px}.footer-brand b{font-size:2.2rem;letter-spacing:-.07em}.footer-brand p,.footer-col a{color:#aeb7ca}.footer-col strong{display:block;color:var(--cyan);font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}.footer-col a{display:block;margin-bottom:8px;font-weight:700}.footer-col a:hover{color:#fff}
+
+/* Mobile nav */
+.bottom-nav{display:none}
+
+/* Responsive */
+@media(max-width:1050px){
+  .header-inner{grid-template-columns:150px 1fr auto}.channel{font-size:.58rem}
+  .hero-grid{grid-template-columns:1fr}.medal-stack{min-height:610px}
+  .story-grid,.why-grid,.talking-grid,.universe-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr}.step:nth-child(2){border-right:0}.step:nth-child(3),.step:nth-child(4){border-top:2px solid #111}
+  .challenge-card,.drops-card,.community-panel,.weird-grid,.app-screens{grid-template-columns:1fr}
+  .challenge-img,.drops-img{min-height:380px}.reviews-grid{grid-template-columns:1fr 1fr}
+  .backstage-list{grid-template-columns:1fr}.backstage-list div{border-right:0;border-bottom:1px solid #bbb}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  body{padding-bottom:82px}.wrap{width:min(100% - 24px,1240px)}
+  header{height:68px}.header-inner{height:68px;grid-template-columns:1fr auto}.logo img{width:105px}.channel{display:none}
+  .broadcast-rail{display:none}.page{margin-left:0;min-height:calc(100svh - 68px)}
+  .hero{min-height:auto;padding:20px 0 35px}.hero-grid{min-height:auto}.hero-copy{padding:40px 0 10px}
+  .hero-broadcast{position:relative;top:auto;right:auto;display:inline-block;margin:0 0 14px}
+  .hero h1{font-size:clamp(4rem,18vw,7rem)}.hero .lead{font-size:1.4rem}.hero-sublead{font-size:.95rem!important}
+  .medal-stack{min-height:500px}.medal-main{width:76%;height:62%;right:3%}.mini-medal{width:35%}.mini-a{left:0}.mini-b{left:4%;bottom:9%}.hero-card{left:8%;right:0}
+  .entrance-note{bottom:105px;left:0}
+  section{padding:52px 0}.section-head{display:block}.section-head p{margin-top:14px}
+  .events-home .section-head:after{display:inline-block;margin-top:15px}
+  .story-grid,.why-grid,.talking-grid,.universe-grid,.reviews-grid,.policy-grid{grid-template-columns:1fr}
+  .why-card{border-right:0;border-bottom:1px solid rgba(255,255,255,.22)}.why-card:last-child{border-bottom:0}
+  .steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:2px solid #111}.step:nth-child(3),.step:nth-child(4){border-top:0}
+  .challenge-img,.drops-img{min-height:300px}.challenge-info{padding:25px}.challenge-info h2{font-size:3.4rem}
+  .screen-stage{min-height:540px}.screen-main{width:68%;height:52%}.screen-log,.screen-cards,.screen-proof{width:47%;height:32%}
+  .footer-grid{grid-template-columns:1fr}
+  footer{margin-left:0;padding-bottom:105px}
+  .bottom-nav{
+    display:grid;position:fixed;left:7px;right:7px;bottom:7px;z-index:2000;
+    grid-template-columns:repeat(6,1fr);gap:3px;background:rgba(11,16,32,.98);border:2px solid #3c4968;padding:4px
+  }
+  .bottom-nav button{border:0;background:transparent;color:#aeb7ca;min-height:57px;font-size:.48rem;font-weight:1000;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+  .bottom-nav button span{font-size:.95rem}.bottom-nav button.active{background:var(--blue);color:#fff}
+  .shop-top{padding:11px 12px;font-size:.58rem}
+}
+@media(max-width:420px){
+  .shop-top{font-size:.5rem;padding:10px 9px}.logo img{width:95px}
+  .hero h1{font-size:3.8rem}.medal-stack{min-height:430px}.hero-card{padding:17px}.hero-card b{font-size:1.35rem}
+  .story-card{min-height:390px}.story-card h3{font-size:2.7rem}.page-title h1{font-size:4rem}
+}
+</style>
 
 <style>
-:root{
-  --green:#048d64;
-  --black:#111111;
-  --grey:#666;
-  --light:#f5f5f5;
-  --border:#e5e5e5;
+/* CLASSIC TWO-COLOUR ROSTER + SHOP FLOW */
+:root{--navy:#101827!important;--navy2:#182235!important;--gold:#c8a45d!important;--paper:#f5f2ea!important;--ink:#121722!important;--muted:#697180!important;--cream:#f5f2ea!important;--yellow:#c8a45d!important;--orange:#c8a45d!important;--blue:#101827!important;--cyan:#c8a45d!important}
+body{background:var(--paper)!important;color:var(--ink)}
+.hero,.page-title,.hub-teaser,.hub-page-hero,.finish-cta,.universe-section,.drops-hero,footer{background:var(--navy)!important}
+.btn,.bottom-nav button.active,.step-num,.event-cta,.story-card .tag{background:var(--navy)!important}
+h1 span,h2 span,.kicker,.section-stamp,.footer-col strong{color:var(--gold)!important}
+.section-stamp{background:var(--gold)!important;color:var(--navy)!important}
+.hero-card{box-shadow:8px 8px 0 var(--gold)!important}
+.story-card{border-color:var(--navy)!important;box-shadow:8px 8px 0 rgba(16,24,39,.12)!important}
+.compact-roster{grid-template-columns:repeat(3,1fr)!important;gap:22px}
+.roster-card{min-height:520px!important;cursor:pointer}
+.roster-card img{opacity:.78}
+.roster-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,24,39,.04) 20%,rgba(16,24,39,.92) 100%);z-index:1}
+.roster-meta{position:absolute;left:20px;right:20px;top:20px;display:flex;justify-content:space-between;z-index:3;color:#fff;font-size:.65rem;font-weight:950;letter-spacing:.1em}
+.roster-meta span:last-child{color:var(--gold)}
+.roster-name{position:absolute;left:22px;right:22px;bottom:66px;z-index:3;color:#fff}
+.roster-name h3{font-size:clamp(2rem,4vw,3.6rem);color:#fff!important;margin-bottom:7px}
+.roster-name p{color:#d8dbe0!important;font-size:.75rem;font-weight:900;letter-spacing:.08em}
+.roster-name b{display:block;color:var(--gold);font-size:1.3rem;margin-top:8px}
+.roster-card .event-cta{position:absolute;left:22px;right:22px;bottom:20px;width:auto;text-align:center;z-index:4;border:1px solid rgba(255,255,255,.2)}
+.roster-card:hover{transform:translateY(-8px)!important}
+.challenge-card,.why-card,.step,.hub-feature,.policy-card,.community-panel,.drops-card,.drops-rules,.review-card,.confession,.talking-card,.backstage-box{border-radius:10px!important}
+.challenge-card{box-shadow:0 18px 55px rgba(16,24,39,.10)!important}
+@media(max-width:980px){.compact-roster{grid-template-columns:1fr!important}}
+</style>
+<style>
+/* CLEAN HOME / SIMPLE EVENT PRESENTATION */
+.home-event-gallery{position:relative;min-height:650px;padding:45px 0 35px;display:grid;grid-template-columns:1.25fr .75fr;grid-template-rows:1fr 1fr;gap:16px}
+.gallery-label{position:absolute;top:8px;left:0;color:var(--gold);font-size:.68rem;font-weight:950;letter-spacing:.12em}
+.gallery-main,.gallery-side{position:relative;overflow:hidden;background:var(--navy);border-radius:8px;border:1px solid rgba(255,255,255,.15)}
+.gallery-main{grid-row:1 / 3}
+.gallery-main img,.gallery-side img{width:100%;height:100%;object-fit:cover}
+.gallery-main:after,.gallery-side:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(16,24,39,.88))}
+.gallery-main span,.gallery-side span{position:absolute;z-index:2;left:18px;bottom:18px;color:#fff;font-weight:950;text-transform:uppercase;letter-spacing:.03em}
+.gallery-main span{font-size:clamp(1.8rem,4vw,3.4rem)}
+.gallery-side span{font-size:1.15rem}
+.gallery-note{position:absolute;right:0;top:8px;color:#c7cbd2;font-size:.68rem;font-weight:850;text-transform:uppercase;letter-spacing:.08em}
+.roster-card{min-height:390px!important}
+.roster-simple{position:absolute;left:22px;right:22px;bottom:22px;z-index:3;color:#fff}
+.roster-simple>span{display:block;color:var(--gold);font-size:.65rem;font-weight:950;letter-spacing:.1em;margin-bottom:8px}
+.roster-simple h3{color:#fff!important;font-size:clamp(2rem,4vw,3.3rem);margin-bottom:5px}
+.roster-simple b{display:block;color:#fff;font-size:1rem;margin-bottom:13px}
+.roster-simple .event-cta{display:inline-flex;position:static;width:auto;border:1px solid rgba(255,255,255,.3);background:#fff!important;color:var(--navy)!important}
+@media(max-width:760px){
+ .home-event-gallery{min-height:520px;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+ .gallery-main{grid-row:1 / 3}
+ .gallery-note{display:none}
+ .gallery-main span{font-size:1.7rem}
 }
-
-*{
-  box-sizing:border-box;
+@media(max-width:520px){
+ .home-event-gallery{min-height:460px;gap:10px}
+ .gallery-main span{font-size:1.4rem;left:12px;bottom:12px}
+ .gallery-side span{font-size:.9rem;left:12px;bottom:12px}
+ .roster-card{min-height:330px!important}
 }
-
-html{
-  scroll-behavior:smooth;
+</style>
+<style>
+/* HOME = ARRIVAL. ROSTER = EVENTS. KEEP THEM SEPARATE. */
+.home-roster-invite{
+  background:var(--navy);
+  color:#fff;
+  padding:72px 0;
+  border-top:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
-
-body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:#fff;
-  color:var(--black);
-  line-height:1.6;
-}
-
-img{
-  max-width:100%;
-  display:block;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-/* =========================
-   NAVIGATION
-========================= */
-
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:#fff;
-  border-bottom:1px solid var(--border);
-}
-
-.nav{
-  max-width:1200px;
-  margin:auto;
-  padding:16px 22px;
+.home-roster-invite-inner{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:20px;
+  gap:35px;
 }
-
-.logo{
-  font-size:20px;
-  font-weight:900;
-  letter-spacing:-.5px;
-}
-
-.logo span{
-  color:var(--green);
-}
-
-.nav-links{
-  display:flex;
-  gap:24px;
-  font-size:14px;
-  font-weight:700;
-}
-
-.nav-links a:hover{
-  color:var(--green);
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-  max-width:1200px;
-  margin:auto;
-  padding:55px 22px 75px;
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:65px;
-  align-items:center;
-}
-
-.hero-image{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.hero-image img{
-  width:100%;
-  max-width:570px;
-  height:auto;
-  object-fit:contain;
-}
-
-.eyebrow{
-  color:var(--green);
-  font-size:13px;
-  font-weight:900;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  margin-bottom:10px;
-}
-
-.hero h1{
-  margin:0;
-  font-size:clamp(42px,6vw,72px);
-  line-height:.95;
-  letter-spacing:-3px;
-  font-weight:1000;
-  max-width:100%;
-  overflow-wrap:anywhere;
-}
-
-.hero .price{
-  font-size:28px;
-  font-weight:900;
-  margin:22px 0 5px;
-}
-
-.hero-meta{
-  color:var(--grey);
-  font-weight:700;
-  margin-bottom:24px;
-}
-
-.hero-tagline{
-  display:inline-block;
-  background:var(--black);
-  color:#fff;
-  padding:10px 15px;
-  font-weight:900;
-  font-size:15px;
-  letter-spacing:1px;
-  margin-bottom:20px;
-}
-
-.hero h2{
-  font-size:clamp(27px,4vw,42px);
-  line-height:1.05;
-  margin:5px 0 15px;
-  letter-spacing:-1px;
-}
-
-.hero-copy{
-  font-size:18px;
-  color:#444;
-  max-width:600px;
-}
-
-.cta{
-  display:inline-block;
-  margin-top:22px;
-  background:var(--green);
-  color:#fff;
-  padding:15px 27px;
-  border-radius:5px;
-  font-weight:900;
-  font-size:16px;
-  transition:.2s ease;
-}
-
-.cta:hover{
-  transform:translateY(-2px);
-  filter:brightness(.95);
-}
-
-/* =========================
-   STATS
-========================= */
-
-.stats{
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  background:#fafafa;
-}
-
-.stats-inner{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-}
-
-.stat{
-  text-align:center;
-  padding:25px 15px;
-  border-right:1px solid var(--border);
-}
-
-.stat:last-child{
-  border-right:none;
-}
-
-.stat strong{
-  display:block;
-  font-size:28px;
-  font-weight:1000;
-}
-
-.stat span{
-  color:var(--grey);
-  font-size:13px;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.7px;
-}
-
-/* =========================
-   GENERAL SECTIONS
-========================= */
-
-.section{
-  max-width:1100px;
-  margin:auto;
-  padding:85px 22px;
-}
-
-.section-title{
-  text-align:center;
-  margin-bottom:50px;
-}
-
-.section-title .small{
-  color:var(--green);
-  font-size:13px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:2px;
-}
-
-.section-title h2{
-  font-size:clamp(34px,5vw,54px);
-  line-height:1;
-  margin:8px 0 15px;
-  letter-spacing:-2px;
-}
-
-.section-title p{
-  max-width:650px;
-  margin:auto;
-  color:#555;
-  font-size:17px;
-}
-
-/* =========================
-   YOUR WAY
-========================= */
-
-.your-way{
-  background:#fff;
-}
-
-.rule-box{
-  background:var(--black);
-  color:#fff;
-  padding:45px;
-  border-radius:10px;
-  text-align:center;
-  margin-bottom:45px;
-}
-
-.rule-box .label{
-  color:#6bd8b5;
-  font-size:13px;
-  font-weight:900;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-
-.rule-box h3{
-  font-size:clamp(32px,5vw,55px);
-  line-height:1;
-  margin:12px 0 15px;
-  letter-spacing:-2px;
-}
-
-.rule-box p{
+.home-roster-invite h2{
+  color:#fff!important;
   max-width:700px;
-  margin:auto;
-  color:#ddd;
-  font-size:18px;
+}
+.home-roster-invite p{
+  color:#d8dce3!important;
+  max-width:600px;
+  margin-top:14px;
+}
+.home-roster-invite .btn{
+  flex:none;
+  background:var(--gold)!important;
+  color:var(--navy)!important;
+  min-width:210px;
 }
 
-.distance-example{
-  border:2px solid var(--green);
+/* ROSTER PAGE — minimal event information, strong visual presentation */
+.roster-page-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+.roster-shop-card{
+  background:var(--navy);
+  border:1px solid rgba(16,24,39,.18);
   border-radius:10px;
   overflow:hidden;
-  margin:40px auto;
-  max-width:800px;
+  cursor:pointer;
+  box-shadow:0 20px 55px rgba(16,24,39,.12);
+  transition:transform .25s ease,box-shadow .25s ease;
 }
-
-.distance-row{
-  display:flex;
-  align-items:center;
-  gap:20px;
-  padding:18px 24px;
-  border-bottom:1px solid var(--border);
-  background:#fff;
+.roster-shop-card:hover{
+  transform:translateY(-7px);
+  box-shadow:0 28px 70px rgba(16,24,39,.18);
 }
-
-.distance-row:last-child{
-  border-bottom:none;
+.roster-shop-image{
+  height:430px;
+  background:var(--navy2);
+  overflow:hidden;
 }
-
-.distance{
-  min-width:85px;
-  font-size:22px;
-  font-weight:1000;
-  color:var(--green);
-}
-
-.distance-text{
-  font-weight:700;
-}
-
-.distance-total{
-  background:var(--green);
-  color:#fff;
-  padding:22px 24px;
-  text-align:center;
-  font-size:22px;
-  font-weight:1000;
-}
-
-.flex-message{
-  text-align:center;
-  max-width:750px;
-  margin:50px auto 0;
-}
-
-.flex-message h3{
-  font-size:clamp(30px,4vw,44px);
-  margin-bottom:12px;
-  letter-spacing:-1.5px;
-}
-
-.flex-message h3 span{
-  color:var(--green);
-}
-
-.flex-message p{
-  color:#555;
-  font-size:18px;
-  margin:8px 0;
-}
-
-/* =========================
-   HOW IT WORKS
-========================= */
-
-.dark-section{
-  background:var(--black);
-  color:#fff;
-}
-
-.dark-section .section-title p{
-  color:#bbb;
-}
-
-.steps{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:25px;
-}
-
-.step{
-  border:1px solid #333;
-  padding:30px;
-  border-radius:8px;
-}
-
-.step-number{
-  color:#6bd8b5;
-  font-size:14px;
-  font-weight:900;
-  letter-spacing:2px;
-}
-
-.step h3{
-  font-size:25px;
-  margin:10px 0;
-}
-
-.step p{
-  color:#bbb;
-  margin:0;
-}
-
-/* =========================
-   GALLERY
-========================= */
-
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-}
-
-.gallery img{
+.roster-shop-image img{
   width:100%;
-  aspect-ratio:1/1;
+  height:100%;
   object-fit:cover;
-  border-radius:8px;
+  transition:transform .4s ease;
 }
-
-/* =========================
-   VIDEO
-========================= */
-
-.video-box{
-  max-width:900px;
-  margin:auto;
-  aspect-ratio:16/9;
-  background:#111;
-  border-radius:10px;
+.roster-shop-card:hover .roster-shop-image img{transform:scale(1.035)}
+.roster-shop-footer{
+  min-height:118px;
+  padding:20px 20px 18px;
   display:flex;
   align-items:center;
-  justify-content:center;
-  color:#fff;
-  text-align:center;
-  padding:30px;
+  justify-content:space-between;
+  gap:16px;
+  background:var(--navy);
 }
-
-.video-box div{
-  max-width:500px;
-}
-
-.video-box strong{
+.roster-shop-footer span{
   display:block;
-  color:#6bd8b5;
-  font-size:14px;
-  letter-spacing:2px;
-  margin-bottom:8px;
+  color:var(--gold);
+  font-size:.64rem;
+  font-weight:950;
+  letter-spacing:.11em;
+  margin-bottom:7px;
 }
-
-.video-box h3{
-  font-size:30px;
-  margin:0 0 8px;
-}
-
-.video-box p{
-  color:#aaa;
+.roster-shop-footer h2{
+  color:#fff!important;
+  font-size:clamp(1.45rem,2.8vw,2.3rem);
+  line-height:.92;
   margin:0;
 }
-
-/* =========================
-   WHAT YOU GET
-========================= */
-
-.get-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
-  max-width:850px;
-  margin:auto;
-}
-
-.get-item{
-  padding:25px;
-  border:1px solid var(--border);
-  border-radius:8px;
+.roster-arrow{
+  flex:0 0 48px;
+  width:48px;
+  height:48px;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:50%;
   background:#fff;
+  color:var(--navy);
+  font-size:1.25rem;
+  font-weight:950;
+  cursor:pointer;
 }
-
-.get-item strong{
-  display:block;
-  font-size:20px;
-  margin-bottom:5px;
+@media(max-width:900px){
+  .roster-page-grid{grid-template-columns:1fr 1fr!important}
+  .roster-shop-image{height:380px}
 }
-
-.get-item p{
-  margin:0;
-  color:#666;
-}
-
-/* =========================
-   FINAL CTA
-========================= */
-
-.final-cta{
-  background:#f5f5f5;
-  text-align:center;
-  padding:90px 22px;
-}
-
-.final-cta h2{
-  font-size:clamp(38px,6vw,64px);
-  line-height:1;
-  margin:0 0 15px;
-  letter-spacing:-2px;
-}
-
-.final-cta p{
-  max-width:600px;
-  margin:0 auto;
-  color:#555;
-  font-size:18px;
-}
-
-.final-price{
-  font-size:32px;
-  font-weight:1000;
-  margin:20px 0;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-  background:#111;
-  color:#fff;
-  padding:35px 22px;
-  text-align:center;
-}
-
-footer strong{
-  font-size:18px;
-}
-
-footer span{
-  color:#6bd8b5;
-}
-
-footer p{
-  color:#888;
-  font-size:13px;
-  margin:8px 0 0;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:850px){
-
-  .nav{
-    padding:14px 16px;
-  }
-
-  .nav-links{
-    gap:12px;
-    font-size:12px;
-  }
-
-  .hero{
-    grid-template-columns:1fr;
-    gap:30px;
-    padding:30px 18px 55px;
-  }
-
-  .hero-image{
-    order:1;
-  }
-
-  .hero-content{
-    order:2;
-  }
-
-  .hero-image img{
-    max-width:470px;
-  }
-
-  .hero h1{
-    font-size:clamp(34px,12vw,58px);
-    letter-spacing:-2px;
-    line-height:.95;
-    word-break:normal;
-    overflow-wrap:break-word;
-  }
-
-  .hero h2{
-    font-size:32px;
-  }
-
-  .hero-copy{
-    font-size:16px;
-  }
-
-  .stats-inner{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .stat:nth-child(2){
-    border-right:none;
-  }
-
-  .stat:nth-child(-n+2){
-    border-bottom:1px solid var(--border);
-  }
-
-  .section{
-    padding:65px 18px;
-  }
-
-  .rule-box{
-    padding:30px 20px;
-  }
-
-  .distance-row{
-    gap:12px;
-    padding:16px;
-  }
-
-  .distance{
-    min-width:70px;
-    font-size:19px;
-  }
-
-  .distance-text{
-    font-size:14px;
-  }
-
-  .distance-total{
-    font-size:18px;
-  }
-
-  .steps{
-    grid-template-columns:1fr;
-  }
-
-  .gallery{
-    grid-template-columns:1fr;
-  }
-
-  .gallery img{
-    aspect-ratio:auto;
-  }
-
-  .get-grid{
-    grid-template-columns:1fr;
-  }
-
-}
-
-@media(max-width:480px){
-
-  .nav{
-    flex-direction:column;
-    gap:8px;
-  }
-
-  .nav-links{
-    width:100%;
-    justify-content:center;
-    flex-wrap:wrap;
-  }
-
-  .hero{
-    padding-top:20px;
-  }
-
-  .hero h1{
-    font-size:39px;
-    letter-spacing:-1.5px;
-  }
-
-  .hero-tagline{
-    font-size:13px;
-    padding:9px 12px;
-  }
-
-  .stat strong{
-    font-size:23px;
-  }
-
-  .stat span{
-    font-size:11px;
-  }
-
-  .section-title h2{
-    letter-spacing:-1px;
-  }
-
+@media(max-width:620px){
+  .home-roster-invite-inner{display:block}
+  .home-roster-invite .btn{margin-top:24px;width:100%}
+  .roster-page-grid{grid-template-columns:1fr!important}
+  .roster-shop-image{height:430px}
 }
 </style>
-</head>
 
+<style>
+/* ROSTER — SIMPLE, CLEAN, IMAGE FIRST */
+.roster-clean-section{padding:42px 0 90px;background:var(--paper)}
+.roster-clean-list{display:grid;gap:38px}
+.roster-clean-card{position:relative;background:var(--navy);overflow:hidden;min-height:560px;border:0;border-radius:0;box-shadow:none}
+.roster-clean-image{position:absolute;inset:0}
+.roster-clean-image img{width:100%;height:100%;object-fit:cover;display:block}
+.roster-clean-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,24,39,.03) 25%,rgba(16,24,39,.18) 48%,rgba(16,24,39,.96) 100%);pointer-events:none}
+.roster-clean-info{position:absolute;left:36px;right:36px;bottom:34px;z-index:2;color:#fff;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.roster-clean-info span{display:block;color:var(--gold);font-size:.72rem;font-weight:950;letter-spacing:.11em;margin-bottom:10px}
+.roster-clean-info h2{color:#fff!important;font-size:clamp(2.5rem,6vw,5rem);line-height:.88;margin:0 0 12px}
+.roster-clean-info strong{display:block;color:#fff;font-size:1.35rem;font-weight:950}
+.roster-clean-button{display:inline-flex;align-items:center;justify-content:center;background:#fff;color:var(--navy)!important;padding:17px 23px;min-width:190px;font-size:.75rem;font-weight:950;text-transform:uppercase;letter-spacing:.045em;white-space:nowrap}
+.roster-clean-button:hover{background:var(--gold);color:var(--navy)!important}
+@media(max-width:620px){
+ .roster-clean-list{gap:24px}
+ .roster-clean-card{min-height:500px}
+ .roster-clean-info{left:22px;right:22px;bottom:22px;display:block}
+ .roster-clean-info h2{font-size:clamp(2.25rem,12vw,4rem)}
+ .roster-clean-button{margin-top:18px;width:max-content;min-width:0;padding:15px 19px}
+}
+</style>
+
+<style id="wrw-colour-polish">
+/* COLOUR POLISH — NAVY + CHAMPIONSHIP GOLD */
+.kicker{color:var(--navy)!important}
+.kicker:before{background:var(--gold)!important}
+h1 span,h2 span{color:var(--navy)!important}
+.section-stamp{background:var(--gold)!important;color:var(--navy)!important}
+.events-home .section-head:after{background:var(--navy)!important;color:#fff!important}
+.price-line,.challenge-price,.best-badge,.challenge-best{color:var(--navy)!important}
+.best-badge,.challenge-best{background:var(--gold)!important}
+.story-card .tag{background:var(--gold)!important;color:var(--navy)!important}
+.roster-clean-info>div>span{color:var(--gold)!important}
+.roster-clean-info strong{color:#fff!important}
+.roster-clean-button{background:#fff!important;color:var(--navy)!important}
+.roster-clean-button:hover{background:var(--gold)!important;color:var(--navy)!important}
+.page-title .kicker,.hero .kicker,.hub-page-hero .kicker,.finish-cta .kicker,
+.founder-strip .kicker,.universe-section .kicker,.drops-hero .kicker{color:var(--gold)!important}
+.hero h1 span,.finish-cta h2 span,.universe-section h2 span{color:var(--gold)!important}
+.hero .lead{color:var(--gold)!important}
+.hero-broadcast,.hero .btn,.shop-top{background:var(--gold)!important;color:var(--navy)!important}
+.hero .btn.secondary{background:#fff!important;color:var(--navy)!important}
+.entrance-note,.quirk-note{background:var(--gold)!important;color:var(--navy)!important}
+.home-roster-invite .btn{background:var(--gold)!important;color:var(--navy)!important}
+.drops-ticker,.drops-badge{background:var(--gold)!important;color:var(--navy)!important;border-color:var(--gold)!important}
+.drops-info .kicker{color:var(--navy)!important}
+.drops-price{color:var(--navy)!important}
+.drops-pills span,.drop-scarcity span{border-color:rgba(16,24,39,.18);color:var(--navy)}
+.roster-shop-footer span{color:var(--gold)!important}
+.roster-arrow{background:#fff!important;color:var(--navy)!important}
+.news-ticker span:before{color:var(--gold)!important}
+.bottom-nav button.active{background:var(--gold)!important;color:var(--navy)!important}
+.footer-col strong{color:var(--gold)!important}
+</style>
+
+<style id="wrw-mobile-polish">
+@media(max-width:620px){
+  body{padding-bottom:92px}
+  .bottom-nav{bottom:8px}
+  .page-title{padding-top:38px;padding-bottom:38px}
+  .page-title h1{line-height:.84}
+  .roster-clean-card{min-height:500px}
+  .roster-clean-info{bottom:26px}
+}
+</style>
+
+<style id="wrw-final-cleanup">
+/* =========================================================
+   WRW FINAL CLEANUP
+   Palette: deep navy + muted championship gold + neutral cream/white.
+   No low-contrast gold-on-cream or blue-on-cream body copy.
+   ========================================================= */
+
+:root{
+  --navy:#101827;
+  --navy2:#182235;
+  --gold:#c8a45d;
+  --paper:#f5f2ea;
+  --ink:#121722;
+  --muted:#596273;
+  --line:rgba(16,24,39,.15);
+}
+
+/* Global readability */
+body{background:var(--paper)!important;color:var(--ink)!important}
+p{color:#454d5d!important}
+section{padding-top:64px;padding-bottom:64px}
+.section-head{margin-bottom:30px}
+.section-head p{color:#4b5361!important}
+.kicker{color:var(--navy)!important}
+.kicker:before{background:var(--gold)!important}
+.section-stamp{background:var(--gold)!important;color:var(--navy)!important}
+h1,h2,h3{color:var(--navy)}
+h1 span,h2 span{color:var(--gold)!important}
+
+/* Dark areas: all supporting text stays readable */
+.hero,.why-section,.founder-strip,.universe-section,.finish-cta,
+.page-title,.hub-page-hero,.drops-hero,footer{background:var(--navy)!important}
+.hero h1,.hero h2,.hero h3,.why-section h2,.why-section h3,
+.founder-strip h2,.founder-strip h3,.universe-section h2,.universe-section h3,
+.finish-cta h2,.finish-cta h3,.page-title h1,.hub-page-hero h1,
+.drops-hero h1{color:#fff!important}
+.hero .hero-sublead,.hero p,.why-section p,.founder-strip p,
+.universe-section p,.finish-cta p,.page-title p,.hub-page-hero p,
+.drops-hero p{color:#d7dce5!important}
+.hero .kicker,.founder-strip .kicker,.universe-section .kicker,
+.finish-cta .kicker,.page-title .kicker,.hub-page-hero .kicker,
+.drops-hero .kicker{color:var(--gold)!important}
+
+/* Fix the founder/community strip specifically */
+.founder-strip .kicker{display:inline-flex;color:var(--gold)!important}
+.founder-strip .btn{background:var(--gold)!important;color:var(--navy)!important}
+
+/* Why section/card readability */
+.why-section .why-card b{color:var(--gold)!important}
+.why-section .why-card p{color:#d7dce5!important}
+.why-card p{color:#454d5d!important}
+.why-card b{color:var(--navy)!important}
+
+/* The homepage why section in the current file is a neutral section,
+   so make every card legible against that surface. */
+section .why-grid .why-card p{color:#454d5d!important}
+section .why-grid .why-card b{color:var(--navy)!important}
+
+/* Procedure section */
+.steps-section{background:var(--gold)!important}
+.steps-section p,.steps p{color:var(--navy)!important}
+.step-num{background:var(--navy)!important;color:var(--gold)!important}
+
+/* Manifesto cards */
+.talking-section{background:var(--paper)!important}
+.talking-section .section-head p{color:#454d5d!important}
+.talking-card{background:#fff!important;color:var(--ink)!important;border-color:var(--navy)!important}
+.talking-card p{color:#454d5d!important}
+.talking-card b{color:var(--navy)!important}
+.talking-card:nth-child(2){background:var(--navy)!important}
+.talking-card:nth-child(2) p,.talking-card:nth-child(2) b{color:#fff!important}
+.talking-card .quirk-note{background:var(--gold)!important;color:var(--navy)!important}
+
+/* Universe cards */
+.universe-card{background:var(--navy2)!important}
+.universe-card:nth-child(2){background:#1c2940!important}
+.universe-card:nth-child(3){background:#0d1421!important}
+.universe-card p{color:#d7dce5!important}
+.universe-card b{color:var(--gold)!important}
+.universe-card .universe-tag{background:var(--gold)!important;color:var(--navy)!important}
+
+/* Backstage / light cards */
+.backstage{background:var(--paper)!important}
+.backstage-box{background:#fff!important;color:var(--ink)!important;border-color:var(--navy)!important}
+.backstage-box p{color:#454d5d!important}
+.backstage-box .kicker{color:var(--navy)!important}
+.backstage-box:before{background:var(--gold)!important;color:var(--navy)!important}
+.backstage-list div{background:#f0eee7!important;color:var(--navy)!important}
+.backstage-list small{color:#596273!important}
+
+/* Challenge/detail pages */
+.challenge-info p{color:#454d5d!important}
+.challenge-info .kicker{color:var(--navy)!important}
+.challenge-info .pills span{color:var(--navy)!important;background:#ece8de!important;border-color:#d7d0c1!important}
+.challenge-info .btn{background:var(--navy)!important;color:#fff!important}
+
+/* Community */
+.community-panel p,.community-panel .kicker{color:#fff!important}
+.community-panel .kicker{color:var(--gold)!important}
+.community-points span{background:var(--navy2)!important;color:#fff!important}
+.community-points small{color:#d7dce5!important}
+
+/* Vault */
+.drops-info p{color:#454d5d!important}
+.drops-info .kicker{color:var(--navy)!important}
+.drops-price{color:var(--navy)!important}
+.drops-pills span{color:var(--navy)!important;background:#ece8de!important}
+
+/* Rules / FAQ */
+.faq-list details{background:#fff!important;border-color:var(--navy)!important}
+.faq-list summary{color:var(--navy)!important}
+.faq-list details p{color:#454d5d!important}
+
+/* Buttons */
+.btn{background:var(--navy)!important;color:#fff!important}
+.btn.secondary{background:#fff!important;color:var(--navy)!important;border:1px solid var(--navy)!important}
+.btn:hover{background:var(--gold)!important;color:var(--navy)!important}
+.shop-top{background:var(--gold)!important;color:var(--navy)!important}
+.home-roster-invite{background:var(--navy)!important}
+.home-roster-invite .kicker{color:var(--gold)!important}
+.home-roster-invite h2{color:#fff!important}
+.home-roster-invite p{color:#d7dce5!important}
+.home-roster-invite .btn{background:var(--gold)!important;color:var(--navy)!important}
+
+/* Kill accidental giant empty spaces caused by legacy hero/event rules */
+.home-event-gallery{min-height:560px}
+.arrival-section{padding:24px 0!important}
+.home-roster-invite{padding:58px 0!important}
+.home-roster-invite-inner{min-height:0}
+.talking-section section,.founder-strip section{padding-top:0}
+
+/* Mobile: don't let the fixed dock cover text */
+@media(max-width:700px){
+  section{padding-top:48px;padding-bottom:48px}
+  .home-event-gallery{min-height:430px}
+  .home-roster-invite{padding:48px 0!important}
+  .founder-strip{padding-bottom:64px!important}
+  .bottom-nav{bottom:8px!important}
+  body{padding-bottom:92px!important}
+  .section-head{margin-bottom:24px}
+  .section-head h2{line-height:.88}
+}
+@media(max-width:420px){
+  .home-event-gallery{min-height:390px}
+  .section-head h2{font-size:3.15rem}
+  .page-title h1{font-size:3.7rem}
+}
+</style>
+
+
+
+
+
+
+
+
+
+<style id="wrw-roster-final">
+.roster-clean-list{display:grid;gap:22px}
+.roster-clean-card{position:relative;background:#101827;border-radius:8px;overflow:hidden;cursor:pointer;box-shadow:0 18px 50px rgba(16,24,39,.12)}
+.roster-clean-image{height:470px;background:#101827;overflow:hidden}
+.roster-clean-image img{width:100%;height:100%;object-fit:cover;display:block}
+.roster-clean-info{position:absolute;inset:auto 0 0;padding:105px 40px 30px;background:linear-gradient(transparent,rgba(16,24,39,.98));color:#fff;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.roster-clean-info>div{min-width:0}
+.roster-clean-info span{display:block;color:#c8a45d!important;font-size:.68rem;font-weight:950;letter-spacing:.12em;margin-bottom:7px}
+.roster-clean-info h2{margin:0;color:#fff!important;font-size:clamp(2rem,5vw,4.2rem);line-height:.86}
+.roster-clean-info strong{display:block;margin-top:10px;color:#fff!important;font-size:1.15rem}
+.roster-clean-button{flex:none;display:inline-flex;align-items:center;justify-content:center;background:#fff!important;color:#101827!important;text-decoration:none!important;padding:18px 23px;font-size:.74rem;font-weight:950;letter-spacing:.04em}
+.roster-clean-card:hover .roster-clean-image img{transform:scale(1.02)}
+.roster-clean-image img{transition:transform .35s ease}
+@media(max-width:600px){
+ .roster-clean-image{height:430px}
+ .roster-clean-info{padding:100px 22px 22px;display:block}
+ .roster-clean-info h2{font-size:3rem}
+ .roster-clean-button{margin-top:16px;width:100%}
+}
+</style>
+
+<style id="wrw-event-pages-final">
+.event-page-clean{
+  background:#f5f2ea;
+  min-height:calc(100vh - 110px);
+  padding:28px 0 110px;
+}
+.event-clean-wrap{
+  width:min(860px,calc(100% - 40px));
+  margin:0 auto;
+}
+.event-back{
+  display:inline-block;
+  margin:0 0 18px;
+  color:#101827!important;
+  text-decoration:none!important;
+  font-size:.72rem;
+  font-weight:950;
+  letter-spacing:.1em;
+}
+.event-clean-image{
+  width:100%;
+  height:min(55vh,520px);
+  min-height:320px;
+  background:#101827;
+  overflow:hidden;
+  border-radius:8px;
+}
+.event-clean-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.event-clean-content{
+  padding:28px 0 0;
+}
+.event-series{
+  display:block;
+  color:#c8a45d;
+  font-size:.67rem;
+  font-weight:950;
+  letter-spacing:.13em;
+  margin-bottom:7px;
+}
+.event-clean-content h1{
+  margin:0;
+  color:#101827!important;
+  font-size:clamp(2.7rem,8vw,5.8rem);
+  line-height:.84;
+  letter-spacing:-.04em;
+}
+.event-distance{
+  margin-top:12px;
+  color:#101827!important;
+  font-size:1.25rem;
+  font-weight:950;
+  letter-spacing:.05em;
+}
+.event-distance span{
+  color:#c8a45d;
+  margin:0 5px;
+}
+.event-price{
+  margin-top:10px;
+  color:#101827!important;
+  font-size:1.45rem;
+  font-weight:950;
+}
+.event-buy{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:22px;
+  min-width:185px;
+  min-height:52px;
+  padding:0 23px;
+  background:#101827!important;
+  color:#fff!important;
+  text-decoration:none!important;
+  font-size:.76rem;
+  font-weight:950;
+  letter-spacing:.09em;
+}
+.event-buy:hover{
+  background:#c8a45d!important;
+  color:#101827!important;
+}
+@media(max-width:600px){
+  .event-page-clean{padding:20px 0 100px}
+  .event-clean-wrap{width:calc(100% - 32px)}
+  .event-clean-image{height:410px;min-height:0}
+  .event-clean-content{padding-top:24px}
+  .event-clean-content h1{font-size:3.35rem}
+  .event-distance{font-size:1.1rem}
+  .event-buy{width:100%}
+}
+</style>
+
+
+<style id="wrw-roster-distance-final">
+.roster-clean-info h2{margin:0!important}
+.roster-distance{display:block;margin-top:9px;color:#d9dde4!important;font-style:normal;font-size:.92rem;font-weight:900;letter-spacing:.05em}
+.roster-clean-info strong{display:block;margin-top:7px!important;color:#fff!important;font-size:1.15rem}
+@media(max-width:600px){.roster-distance{font-size:.84rem}}
+</style></head>
 <body>
+<header><div class="wrap header-inner">
+  <a class="logo" href="#" data-page="home"><img src="logo.png" alt="WRW logo"></a>
+  <div class="channel"><b>WRW NETWORK</b><span>CHANNEL 01</span><span>LIVE FROM THE MAIN EVENT</span></div>
+  <button class="shop-top" type="button" data-page="challenges">Book Your Event</button>
+</div></header>
+<nav class="broadcast-rail" aria-label="WRW navigation">
+  <button data-page="home" class="active"><span>⌂</span>Arena</button>
+  <button data-page="challenges"><span>▣</span>Roster</button>
+  <button data-page="drops"><span>◆</span>Vault</button>
+  <button data-page="hub"><span>◉</span>Hub</button>
+  <button data-page="community"><span>◎</span>Locker</button>
+  <button data-page="help"><span>?</span>Rules</button>
+  <div class="rail-live">WRW NETWORK • LIVE</div>
+</nav>
+<main>
 
-<header>
-  <nav class="nav">
-
-    <a href="/" class="logo">
-      WALK RUN <span>WRESTLE</span>
-    </a>
-
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/shop/">Shop</a>
-      <a href="/challenges/">Challenges</a>
-      <a href="/community/">Community</a>
-    </div>
-
-  </nav>
-</header>
-
-
-<!-- =========================
-     HERO
-========================= -->
-
+<div class="page active" id="page-home">
 <section class="hero">
-
-  <div class="hero-image">
-    <img
-      src="images/rattlesnake-medal.png"
-      alt="The Rattlesnake medal"
-    >
+<div class="hero-broadcast"><i></i>LIVE — WRW MAIN EVENT</div>
+<div class="wrap hero-grid">
+<div class="hero-copy">
+<span class="kicker">Welcome to WRW • The wrestling-inspired world of moving</span>
+<h1>THIS ISN'T<br/><span>A RACE.</span></h1>
+<p class="lead">It's a main event.</p>
+<p class="hero-sublead">Walking and running challenges with real medals, digital progress, big characters and absolutely no need to be an elite athlete.</p>
+<div class="quirk-note">Yes. We made a wrestling universe around walking.</div>
+<p class="tiny-chaos">It made perfect sense at the time.</p>
+<div class="hero-actions">
+<button class="btn" data-page="challenges">Enter The Arena</button>
+<button class="btn secondary" data-page="challenges">Meet The Roster</button>
+</div>
+</div>
+<div class="home-event-gallery">
+      <div class="gallery-label">CURRENT EVENTS</div>
+      <div class="gallery-main"><img src="hero (1).jpg" alt="The Rattlesnake"><span>The Rattlesnake</span></div>
+      <div class="gallery-side gallery-warrior"><img src="warrior.png" alt="The Warrior"><span>The Warrior</span></div>
+      <div class="gallery-side gallery-deadman"><img src="medal.png.jpg" alt="The Deadman"><span>The Deadman</span></div>
+      <div class="gallery-note">Choose your event below.</div>
+    </div>
   </div>
-
-  <div class="hero-content">
-
-    <div class="eyebrow">
-      Walk Run Wrestle Challenge
-    </div>
-
-    <h1>THE RATTLESNAKE</h1>
-
-    <div class="price">
-      £19.99
-    </div>
-
-    <div class="hero-meta">
-      Heavy Medal • App Included
-    </div>
-
-    <div class="hero-tagline">
-      WALK IT. RUN IT. SPLIT IT.
-    </div>
-
-    <h2>
-      3.16K EVERY CHALLENGE DAY.
-    </h2>
-
-    <p class="hero-copy">
-      You don't have to run 3.16K.
-      You don't even have to do it all at once.
-      Every bit counts towards your daily 3.16K.
-    </p>
-
-    <a href="#enter" class="cta">
-      ENTER THE RING
-    </a>
-
-  </div>
-
 </section>
-
-
-<!-- =========================
-     STATS
-========================= -->
-
-<section class="stats">
-
-  <div class="stats-inner">
-
-    <div class="stat">
-      <strong>10</strong>
-      <span>Challenge Days</span>
-    </div>
-
-    <div class="stat">
-      <strong>3.16K</strong>
-      <span>Each Challenge Day</span>
-    </div>
-
-    <div class="stat">
-      <strong>31.6K</strong>
-      <span>Total Distance</span>
-    </div>
-
-    <div class="stat">
-      <strong>£19.99</strong>
-      <span>Entry</span>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     YOUR WAY
-========================= -->
-
-<section class="section your-way">
-
-  <div class="section-title">
-
-    <div class="small">
-      The Rattlesnake Rule
-    </div>
-
-    <h2>
-      3.16K. Any way you like.
-    </h2>
-
-    <p>
-      The daily distance has to be completed.
-      How you get there is completely up to you.
-    </p>
-
-  </div>
-
-
-  <div class="rule-box">
-
-    <div class="label">
-      One simple rule
-    </div>
-
-    <h3>
-      Get to 3.16K.
-    </h3>
-
-    <p>
-      Every challenge day, you need to reach 3.16K.
-      That's the bit that matters.
-      How you cover it is entirely your choice.
-    </p>
-
-  </div>
-
-
-  <div class="distance-example">
-
-    <div class="distance-row">
-
-      <div class="distance">
-        1K
-      </div>
-
-      <div class="distance-text">
-        Walking the dog in the morning
-      </div>
-
-    </div>
-
-
-    <div class="distance-row">
-
-      <div class="distance">
-        + 0.8K
-      </div>
-
-      <div class="distance-text">
-        A quick run around the block
-      </div>
-
-    </div>
-
-
-    <div class="distance-row">
-
-      <div class="distance">
-        + 1.36K
-      </div>
-
-      <div class="distance-text">
-        Walking to the shop
-      </div>
-
-    </div>
-
-
-    <div class="distance-total">
-      = 3.16K — DAILY CHALLENGE COMPLETE
-    </div>
-
-  </div>
-
-
-  <div class="flex-message">
-
-    <h3>
-      <span>Walk it.</span>
-      Run it.
-      Split it.
-    </h3>
-
-    <p>
-      A little in the morning.
-      A little at lunch.
-      A quick run later.
-      A walk to the shops.
-    </p>
-
-    <p>
-      It all adds up.
-    </p>
-
-    <p>
-      Stop for a coffee. Take a breather.
-      Carry on when you're ready.
-    </p>
-
-    <p>
-      <strong>
-        Just get to 3.16K each challenge day.
-      </strong>
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     HOW IT WORKS
-========================= -->
-
-<section class="dark-section">
-
-  <div class="section">
-
-    <div class="section-title">
-
-      <div class="small">
-        How It Works
-      </div>
-
-      <h2>
-        Simple. Flexible. Relentless.
-      </h2>
-
-      <p>
-        Ten challenge days.
-        One target each day.
-        Your challenge, your way.
-      </p>
-
-    </div>
-
-
-    <div class="steps">
-
-      <div class="step">
-
-        <div class="step-number">
-          STEP 01
-        </div>
-
-        <h3>
-          Start Your Challenge
-        </h3>
-
-        <p>
-          Get your Rattlesnake medal and access to the app.
-        </p>
-
-      </div>
-
-
-      <div class="step">
-
-        <div class="step-number">
-          STEP 02
-        </div>
-
-        <h3>
-          Hit 3.16K
-        </h3>
-
-        <p>
-          Complete 3.16K on each challenge day.
-          Walk, run or combine the two.
-        </p>
-
-      </div>
-
-
-      <div class="step">
-
-        <div class="step-number">
-          STEP 03
-        </div>
-
-        <h3>
-          Keep Going
-        </h3>
-
-        <p>
-          Complete all ten challenge days.
-          Miss a day? Pick up where you left off.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     MEDAL GALLERY
-========================= -->
-
-<section class="section">
-
-  <div class="section-title">
-
-    <div class="small">
-      Meet The Medal
-    </div>
-
-    <h2>
-      The Rattlesnake
-    </h2>
-
-    <p>
-      A challenge with a medal worth earning.
-    </p>
-
-  </div>
-
-
-  <div class="gallery">
-
-    <img
-      src="images/rattlesnake-front.jpg"
-      alt="The Rattlesnake medal front"
-    >
-
-    <img
-      src="images/rattlesnake-back.jpg"
-      alt="The Rattlesnake medal back"
-    >
-
-    <img
-      src="images/rattlesnake-detail.jpg"
-      alt="The Rattlesnake medal detail"
-    >
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     VIDEO
-========================= -->
-
-<section class="section">
-
-  <div class="section-title">
-
-    <div class="small">
-      See It In Action
-    </div>
-
-    <h2>
-      The Rattlesnake.
-    </h2>
-
-    <p>
-      Get a closer look before you enter the ring.
-    </p>
-
-  </div>
-
-
-  <div class="video-box">
-
+<section class="arrival-section" style="background:#101827;color:#fff;padding:28px 0">
+<div class="wrap" style="display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap">
+<div><span style="font-size:.7rem;font-weight:950;text-transform:uppercase;letter-spacing:.1em;color:#c8a45d">WRW NOTICE BOARD</span><h3 style="color:#fff;margin-top:7px">You have entered a fitness universe with unusually high production values.</h3></div>
+<div style="background:#fff;color:#111;padding:14px 17px;border-radius:4px;font-weight:900;transform:rotate(1deg)">
+<span style="display:block;font-size:.65rem;text-transform:uppercase;color:#101827">Important announcement</span>
+<span>Walking is still completely allowed.</span>
+</div>
+</div></section>
+<section class="home-roster-invite">
+  <div class="wrap home-roster-invite-inner">
     <div>
-
-      <strong>
-        VIDEO COMING HERE
-      </strong>
-
-      <h3>
-        Watch The Rattlesnake Reveal
-      </h3>
-
-      <p>
-        Replace this box with your Rattlesnake video
-        when you're ready.
-      </p>
-
+      <span class="kicker">WRW Roster</span>
+      <h2>The events are waiting.</h2>
+      <p>Step into the Roster to see the current challenges and choose your event.</p>
     </div>
-
+    <button class="btn" type="button" data-page="challenges">View The Roster →</button>
   </div>
-
 </section>
-
-
-<!-- =========================
-     WHAT YOU GET
-========================= -->
-
-<section class="section">
-
-  <div class="section-title">
-
-    <div class="small">
-      Your Entry Includes
-    </div>
-
-    <h2>
-      What You Get
-    </h2>
-
-  </div>
-
-
-  <div class="get-grid">
-
-    <div class="get-item">
-
-      <strong>
-        🏅 Heavy Medal
-      </strong>
-
-      <p>
-        Your physical Rattlesnake medal to earn and keep.
-      </p>
-
-    </div>
-
-
-    <div class="get-item">
-
-      <strong>
-        📱 Challenge App
-      </strong>
-
-      <p>
-        Your digital companion for taking on the challenge.
-      </p>
-
-    </div>
-
-
-    <div class="get-item">
-
-      <strong>
-        🐍 10 Challenge Days
-      </strong>
-
-      <p>
-        Complete 3.16K on each challenge day.
-      </p>
-
-    </div>
-
-
-    <div class="get-item">
-
-      <strong>
-        🏃 Your Way
-      </strong>
-
-      <p>
-        Walk it, run it, split it.
-        However you get there, the distance counts.
-      </p>
-
-    </div>
-
-  </div>
-
+<section style="background:var(--soft)">
+<div class="wrap">
+<div class="section-head">
+<div><span class="section-stamp">Why This Exists</span><span class="kicker">The WRW Advantage</span><h2>Built for people who are <span>bored of boring.</span></h2></div>
+</div>
+<div class="why-grid">
+<div class="why-card"><div class="icon">🏅</div><b>Heavyweight Hardware</b><p>Real medals. Properly chunky. The sort of thing you accidentally show everyone you have.</p></div>
+<div class="why-card"><div class="icon">🎟️</div><b>Built Around Events</b><p>Every challenge has its own identity, rules and story. Because apparently 3.16K needed lore.</p></div>
+<div class="why-card"><div class="icon">⚡</div><b>Made To Be Fun</b><p>Fitness doesn't have to feel like punishment. We checked.</p></div>
+<div class="why-card"><div class="icon">💚</div><b>Community First</b><p>We're here to cheer you on, not judge your pace. Unless you start bragging.</p></div>
+</div>
+</div>
 </section>
-
-
-<!-- =========================
-     FINAL CTA
-========================= -->
-
-<section class="final-cta" id="enter">
-
-  <h2>
-    READY TO STRIKE?
-  </h2>
-
-  <p>
-    Ten challenge days.
-    3.16K each day.
-    31.6K in total.
-  </p>
-
-  <div class="final-price">
-    £19.99
-  </div>
-
-  <a
-    href="#YOUR-PAYPAL-LINK"
-    class="cta"
-    target="_blank"
-    rel="noopener"
-  >
-    ENTER THE RING
-  </a>
-
+<section>
+<div class="wrap">
+<div class="section-head"><div><span class="section-stamp">The Official Procedure</span><span class="kicker">Simple Steps</span><h2>Choose. Move. Track. Claim.</h2></div></div>
+<div class="steps">
+<div class="step"><div class="step-num">1</div><b>Pick</b><p>Choose the event that speaks to you.</p></div>
+<div class="step"><div class="step-num">2</div><b>Move</b><p>Walk it. Jog it. Run it. Crawl dramatically if absolutely necessary.</p></div>
+<div class="step"><div class="step-num">3</div><b>Track</b><p>Log your progress in the WRW Hub. Yes, we made an app for walking.</p></div>
+<div class="step"><div class="step-num">4</div><b>Claim</b><p>Finish the challenge. Then get your medal.</p></div>
+</div>
+</div>
 </section>
+<section class="talking-section">
+<div class="wrap">
+<div class="section-head">
+<div>
+<span class="kicker">Our Manifesto</span>
+<h2>Honest and <span>human.</span></h2>
+</div>
+<p>No corporate fluff. Just two passionate creators building something we love.</p>
+</div>
+<div class="talking-grid">
+<article class="talking-card">
+<div class="speech">👟</div>
+<b>Zero Elite Pressure</b>
+<p>Walk it. Jog it. Run it. Take a breather. This isn't about being the fastest person in the room.</p><div class="quirk-note">Nobody is checking your split times. Relax.</div>
+</article>
+<article class="talking-card">
+<div class="speech">🤼</div>
+<b>Pure Wrestling Energy</b>
+<p>Big characters. Big moments. Big finishes. That's the secret sauce that makes WRW different.</p><div class="quirk-note">Because walking 3K apparently needed an entrance.</div>
+</article>
+<article class="talking-card">
+<div class="speech">🔥</div>
+<b>Make It Yours</b>
+<p>No two people have to approach a challenge the same way. Find your pace and your way to the finish.</p><div class="quirk-note">Your pace. Your way. Your slightly questionable decision-making.</div>
+</article>
+</div>
+</div>
+</section>
+<section class="founder-strip">
+<div class="wrap">
+<span class="kicker">Directly from headquarters</span>
+<h2>Built by creators who wanted something better.</h2>
+<p>We're Liam &amp; Becca. WRW is our project, built because we wanted fitness to feel a lot more fun.</p>
+<button class="btn" data-page="community">Meet The Community</button>
+</div>
+</section>
+<section class="universe-section">
+<div class="wrap">
+<div class="section-head">
+<div>
+<span class="kicker">Welcome to the WRW universe</span>
+<h2 style="color:#fff">It's a fitness quest. <span>It's also a main event show.</span></h2>
+</div>
+<p style="color:#d7dce5">We love a bit of theatrics. The WRW world keeps growing around the events.</p>
+</div>
+<div class="universe-grid">
+<article class="universe-card">
+<span class="universe-tag">Backstage Lore</span>
+<h3>Characters with actual personality.</h3>
+<p>The events have identities, characters and stories that make them feel like more than a distance on a screen.</p><b>Yes, there is lore. No, you don't need to understand all of it. We barely do.</b>
+<b>Think theme music. Think entrances.</b>
+</article>
+<article class="universe-card">
+<span class="universe-tag">Rivalries</span>
+<h3>Challenges that clash.</h3>
+<p>Different events. Different personalities. Different ways to take on the challenge.</p><b>Some want you to build slowly. Some want to ruin your weekend.</b>
+<b>Pick your side. Prove your point.</b>
+</article>
+<article class="universe-card">
+<span class="universe-tag">WRW News Network</span>
+<h3>Updates and announcements.</h3>
+<p>Medal reveals, event updates and news broadcasts direct from headquarters.</p><b>Important updates nobody in the outside world asked for.</b>
+<b>Hard-hitting sports entertainment coverage.</b>
+</article>
+</div>
+<div aria-label="WRW news ticker" class="news-ticker" id="newsTicker">
+<div class="news-ticker-track">
+<span>🚨 BREAKING: Someone has completed their first 1K and is now considered extremely dangerous</span>
+<span>EXCLUSIVE: Becca has rejected Liam's latest medal idea</span>
+<span>DEVELOPING: The Deadman is still refusing to stay dead</span>
+<span>WEATHER UPDATE: It's probably raining. Go anyway.</span>
+<span>🚨 BREAKING: Someone has completed their first 1K and is now considered extremely dangerous</span>
+<span>EXCLUSIVE: Becca has rejected Liam's latest medal idea</span>
+<span>DEVELOPING: The Deadman is still refusing to stay dead</span>
+<span>WEATHER UPDATE: It's probably raining. Go anyway.</span>
+</div>
+</div>
+</div>
+</section>
+<section class="backstage">
+<div class="wrap">
+<div class="backstage-box">
+<span class="kicker">Behind the scenes</span>
+<h3>Built in real time. No smoke. No mirrors.</h3>
+<p>Medals, code, designs and ridiculous ideas — this is the stuff happening backstage at WRW.</p><p class="tiny-chaos">Important: this is a serious challenge. The people designing it are not.</p>
+<div class="backstage-list">
+<div>🏅 Hardware Lab<small>Medal concepts, samples and reveals.</small></div>
+<div>📱 Code &amp; Design<small>Building the Hub and the WRW experience.</small></div>
+<div>🤼 The Hype Machine<small>Turning ordinary fitness into a main event.</small></div>
+</div>
+</div>
+</div>
+</section>
+<section class="finish-cta">
+<div class="wrap">
+<span class="kicker">Ready?</span>
+<h2>Make your <span>move.</span></h2>
+<p>Pick your event. Take it on your way. Finish with something worth keeping.</p>
+<button class="btn" data-page="challenges">See The Roster</button>
+</div>
+</section>
+</div>
+<div class="page" id="page-drops">
+<section class="drops-hero">
+<div class="wrap">
+<div class="drops-ticker"><span></span> Final Vault Allocation — 20 Units</div>
+<h1>Unsanctioned <span>Drops</span></h1>
+<p>Welcome to the off-roster vault. This is an exclusive clearance of physical archive hardware. Once these 20 units sell out, this run is permanently retired and will never exist or be produced again.</p>
+</div>
+</section>
+<section>
+<div class="wrap">
+<div class="drops-grid">
+<article class="drops-card">
+<div class="drops-img">
+<span class="drops-badge">Final 20 • Never To Return</span>
+<img alt="Unsanctioned Sunset Slam 2026 Kinetic Spinner Medal" src="sunset.jpg"/>
+</div>
+<div class="drops-info">
+<span class="kicker">Limited Vault Clearance</span>
+<h2>2026 Sunset Slam Kinetic Spinner Medal</h2>
+<div class="drops-price">£10.99 <span>£19.99</span></div>
+<p>An unexpected delivery delay held up this physical drop, so we are releasing the final 20 physical units straight to collectors at an ultra-rare markdown with <strong>Free UK Postage</strong> included.</p>
+<p>Stamped explicitly with the <strong>2026</strong> event year, this physical edition features an ultra-satisfying 360-degree kinetic spinning center core surrounded by high-relief zinc alloy casting. This is a standalone hardware drop—once these 20 pieces are claimed, they are gone forever.</p>
+<div class="drops-pills">
+<span>🗓️ Official 2026 Edition</span>
+<span>⚙️ 360° Kinetic Spinner Core</span>
+<span>📦 Hardware Only</span>
+<span>🚚 Free UK Postage Included</span>
+<span>⚡ Final 20 • Never Restocked</span>
+</div>
+<a class="btn" href="#YOUR-PAYPAL-LINK" rel="noopener" target="_blank">Claim 1 of 20 Remaining</a>
+</div>
+</article>
+</div>
+<div class="drops-rules">
+<h3>The Unsanctioned Rule</h3>
+<p>Hardware only. No app. No challenge. No restock. When the final one is gone, it's gone.</p>
+</div>
+</div>
+</section>
+</div>
+<div class="page" id="page-challenges">
+<section class="page-title"><div class="wrap"><span class="kicker">The Roster</span><h1>Choose your event.</h1><p>Three events. Pick yours.</p></div></section>
+<section class="roster-clean-section"><div class="wrap roster-clean-list">
+  <article class="roster-clean-card">
+    <div class="roster-clean-image"><img src="hero (1).jpg" alt="The Rattlesnake"></div>
+    <div class="roster-clean-info">
+      <div><span>LEGEND SERIES</span><h2>The Rattlesnake</h2><span class="roster-distance">31.6K • 10 DAYS</span><strong>£19.99</strong></div>
+      <a class="roster-clean-button" href="https://walkrunwrestle.github.io/Shoprs" target="_blank" rel="noopener">The Rattlesnake →</a>
+    </div>
+  </article>
+
+  <article class="roster-clean-card">
+    <div class="roster-clean-image"><img src="warrior.png" alt="The Warrior"></div>
+    <div class="roster-clean-info">
+      <div><span>LEGEND SERIES</span><h2>The Warrior</h2><span class="roster-distance">21K • 6 DAYS</span><strong>£19.99</strong></div>
+      <a class="roster-clean-button" href="https://walkrunwrestle.github.io/Shopuw" target="_blank" rel="noopener">The Warrior →</a>
+    </div>
+  </article>
+
+  <article class="roster-clean-card">
+    <div class="roster-clean-image"><img src="medal.png.jpg" alt="The Deadman"></div>
+    <div class="roster-clean-info">
+      <div><span>LEGEND SERIES</span><h2>The Deadman</h2><span class="roster-distance">100K • 22 DAYS</span><strong>£19.99</strong></div>
+      <a class="roster-clean-button" href="https://walkrunwrestle.github.io/Shopdm" target="_blank" rel="noopener">The Deadman →</a>
+    </div>
+  </article>
+</div></section>
+</div>
+<div class="page" id="page-rattlesnake">
+  <section class="event-page-clean">
+    <div class="event-clean-wrap">
+      <a class="event-back" href="#" data-page="challenges">← ROSTER</a>
+      <div class="event-clean-image">
+        <img src="hero (1).jpg" alt="THE RATTLESNAKE">
+      </div>
+      <div class="event-clean-content">
+        <span class="event-series">LEGEND SERIES</span>
+        <h1>THE RATTLESNAKE</h1>
+        <div class="event-price">£19.99</div>
+        <div class="event-distance">31.6K <span>•</span> 10 DAYS</div><a class="event-buy" href="https://walkrunwrestle.github.io/Shoprs" target="_blank" rel="noopener">BUY NOW →</a>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="page" id="page-warrior">
+  <section class="event-page-clean">
+    <div class="event-clean-wrap">
+      <a class="event-back" href="#" data-page="challenges">← ROSTER</a>
+      <div class="event-clean-image">
+        <img src="warrior.png" alt="THE WARRIOR">
+      </div>
+      <div class="event-clean-content">
+        <span class="event-series">LEGEND SERIES</span>
+        <h1>THE WARRIOR</h1>
+        <div class="event-price">£19.99</div>
+        <div class="event-distance">21K <span>•</span> 6 DAYS</div><a class="event-buy" href="https://walkrunwrestle.github.io/Shopuw" target="_blank" rel="noopener">BUY NOW →</a>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="page" id="page-deadman">
+  <section class="event-page-clean">
+    <div class="event-clean-wrap">
+      <a class="event-back" href="#" data-page="challenges">← ROSTER</a>
+      <div class="event-clean-image">
+        <img src="medal.png.jpg" alt="THE DEADMAN">
+      </div>
+      <div class="event-clean-content">
+        <span class="event-series">LEGEND SERIES</span>
+        <h1>THE DEADMAN</h1>
+        <div class="event-price">£19.99</div>
+        <div class="event-distance">100K <span>•</span> 22 DAYS</div><a class="event-buy" href="https://walkrunwrestle.github.io/Shopdm" target="_blank" rel="noopener">BUY NOW →</a>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="page" id="page-hub"><section class="hub-page-hero"><div class="wrap"><span class="kicker">WRW Interactive Hub</span><h1>A digital arena for your progress.</h1><p>Track distance, unlock digital trading cards, upload proof, and manage your challenge roster.</p></div></section><section><div class="wrap app-screens"><div class="screen-stage"><div class="screen screen-main"><img alt="WRW Hub screen" src="hub.png"/><span>Hub</span></div><div class="screen screen-log"><img alt="Log progress screen" src="log.png"/><span>Log</span></div><div class="screen screen-cards"><img alt="Cards screen" src="cards.png"/><span>Cards</span></div><div class="screen screen-proof"><img alt="Send proof screen" src="send.png"/><span>Proof</span></div></div><div class="hub-four">
+<div class="hub-feature"><strong>Log</strong><p>Record completed distance and keep your sessions tied to your active event.</p></div>
+<div class="hub-feature"><strong>Track</strong><p>See your progress and exactly what remains to finish the challenge.</p></div>
+<div class="hub-feature"><strong>Collect</strong><p>Unlock digital trading cards as you hit event milestones.</p></div>
+<div class="hub-feature"><strong>Prove</strong><p>Submit your completion proof when you're ready to claim your finish.</p></div>
+<p class="muted" style="grid-column:1/-1">No app install required. The WRW Hub runs in your browser.</p>
+</div></div></section></div>
+ <div class="page" id="page-community"><section class="page-title"><div class="wrap"><span class="kicker">The Community</span><h1>Welcome to the Locker Room.</h1><p>Where challengers cheer each other on, celebrate victories together, and occasionally talk an unreasonable amount about medals.</p></div></section><section><div class="wrap community-panel"><div><span class="kicker">Live Locker Room Action</span><h2>Join the most supportive crew in fitness.</h2><p>Share your daily mileage, show off your unboxing moments, banter about wrestling storylines, and connect with people who love the hustle.</p><a class="btn" href="#" rel="noopener" target="_blank">Join The Community</a></div><div class="community-points"><span>💬 Private Locker Room<br/><small>Exclusive members-only group.</small></span><span>📸 Showcase Your Gear<br/><small>Post your medal photos and progress.</small></span><span>🏅 First-Look Medal Reveals<br/><small>Sneak peeks before public announcements.</small></span><span>🤝 Legendary Support<br/><small>Cheering you on every step of the way.</small></span></div></div></section>
+<section class="reviews-section community-reviews">
+<div class="wrap">
+<div class="section-head">
+<div>
+<span class="kicker">What Challengers Are Saying</span>
+<h2>THE MEDALS GET NOTICED.</h2>
+<p>Real feedback from the WRW community, in their own words.</p>
+</div>
+</div>
+<div class="reviews-grid">
+<div class="review-card review-snippet">
+<div class="stars">★★★★★</div>
+<p>“Great service, friendly and very informative.”</p>
+</div>
+<div class="review-card review-snippet">
+<div class="stars">★★★★★</div>
+<p>“Answered all my questions about entering my details quickly.”</p>
+</div>
+<div class="review-card review-snippet">
+<div class="stars">★★★★★</div>
+<p>“And the medal is EPIC!”</p>
+</div>
+<div class="review-card review-snippet">
+<div class="stars">★★★★★</div>
+<p>“Any questions answered quickly. Excellent communication.”</p>
+</div>
+<div class="review-card review-snippet">
+<div class="stars">★★★★★</div>
+<p>“Medal sent well packaged and arrived quickly.”</p>
+</div>
+<div class="review-card review-snippet">
+<div class="stars">★★★★★</div>
+<p>“Medal is absolutely stunning. Highly recommend. Will be using again.”</p>
+</div>
+</div>
+</div>
+</section>
+<section class="finish-cta"><div class="wrap"><span class="kicker">The Finish Line</span><h2>The hardware is just the trophy.</h2><p>The real victory is proving to yourself what you can achieve when you step into the ring.</p><button class="btn" data-page="challenges">Choose Your Story</button></div></section></div>
+ <div class="page" id="page-help"><section class="page-title"><div class="wrap"><span class="kicker">Support Desk</span><h1>Got questions? We have answers.</h1><p>Straightforward info with zero fluff. If something has gone weird, tell us. We have probably tested it first.</p></div></section><section><div class="wrap faq-list"><details open=""><summary>Can I walk the challenges?</summary><p>100% yes! Walking, jogging, running, or a mix of all three is completely welcome.</p></details><details><summary>Do I have to complete it in one go?</summary><p>Not unless the specific challenge rules say so. Each event explains whether it is flexible, daily, or streak-based.</p></details><details><summary>How do I log my distance?</summary><p>Use the web-based WRW Hub to record your sessions and keep track of your active challenge.</p></details><details><summary>How does proof verification work?</summary><p>When an event requires proof, upload a screenshot from your smartwatch, treadmill, or tracking app through the Hub.</p></details><details><summary>When will I receive my medal?</summary><p>Check the individual event page and your order/completion information for the current medal fulfilment details.</p></details><details><summary>Where do you ship?</summary><p>Current delivery options, costs and destinations are shown during checkout. If you are unsure, contact us before ordering.</p></details></div></section><section style="background:var(--soft)"><div class="wrap"><div class="section-head"><div><span class="kicker">The Fine Print</span><h2>Essential details.</h2></div></div><div class="policy-grid"><div class="policy-card"><h3>Refunds &amp; Orders</h3><p>Refund and cancellation terms will depend on the product and order status. Please check the applicable terms before ordering.</p></div><div class="policy-card"><h3>Data Privacy</h3><p>Your information is used to provide and manage WRW services. See the full privacy policy for details on what we collect and why.</p></div><div class="policy-card"><h3>Locker Room Rules</h3><p>Support your fellow challengers. Be respectful, encouraging, and positive at all times.</p></div><div class="policy-card"><h3>Health &amp; Fitness</h3><p>Listen to your body. Always consult a healthcare professional before starting new intensive exercise routines.</p></div><div class="policy-card"><h3>Giving Back</h3><p>We want WRW to do more than get people moving. Any future charity partnerships or fundraising will be announced clearly here.</p></div><div class="policy-card"><h3>Contact Us</h3><p>Need a hand? Contact WRW through the official contact route shown on the website and we will get back to you.</p></div></div></div></section></div>
+
+</main>
+
+<footer><div class="wrap footer-grid">
+<div class="footer-brand" id="footerBrand"><b>WRW</b><p>Where running meets wrestling. Created by Liam &amp; Becca because ordinary fitness events needed a little more theatre.</p><div class="quirk-note">Built with medals, caffeine and unusually ambitious ideas.</div></div>
+<div class="footer-col"><strong>Events</strong><a data-page="rattlesnake" href="#">The Rattlesnake</a><a data-page="warrior" href="#">The Warrior</a><a data-page="deadman" href="#">The Deadman</a></div>
+<div class="footer-col"><strong>WRW</strong><a data-page="home" href="#">Home</a><a data-page="hub" href="#">WRW Hub</a><a data-page="community" href="#">Locker Room</a><a data-page="drops" href="#">Unsanctioned Drops</a></div>
+<div class="footer-col"><strong>Help</strong><a data-page="help" href="#">FAQ</a><a data-page="help" href="#">Policies</a><a data-page="help" href="#">Contact</a></div>
+</div></footer>
+<nav class="bottom-nav" aria-label="WRW mobile navigation">
+  <button data-page="home" class="active"><span>⌂</span>Arena</button>
+  <button data-page="challenges"><span>▣</span>Roster</button>
+  <button data-page="drops"><span>◆</span>Vault</button>
+  <button data-page="hub"><span>◉</span>Hub</button>
+  <button data-page="community"><span>◎</span>Locker</button>
+  <button data-page="help"><span>?</span>Rules</button>
+</nav><script>
+(function(){
+  const pages=document.querySelectorAll('.page');
+  const triggers=document.querySelectorAll('[data-page]');
+  function showPage(page){
+    pages.forEach(p=>p.classList.toggle('active',p.id==='page-'+page));
+    triggers.forEach(t=>t.classList.toggle('active',t.dataset.page===page));
+    window.scrollTo({top:0,behavior:'smooth'});
+    try{history.replaceState(null,'','#'+page)}catch(e){}
+  }
+  triggers.forEach(el=>el.addEventListener('click',function(e){
+    const page=this.dataset.page;
+    if(page){e.preventDefault();showPage(page)}
+  }));
+  const initial=(location.hash||'').replace('#','');
+  const valid=['home','drops','challenges','rattlesnake','warrior','deadman','hub','community','help'];
+  showPage(valid.includes(initial)?initial:'home');
+})();
+</script>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
 
-<footer>
-
-  <strong>
-    WALK RUN <span>WRESTLE</span>
-  </strong>
-
-  <p>
-    Virtual runs. Real medals. Wrestle energy.
-  </p>
-
-</footer>
-
+<script id="wrw-roster-card-navigation">
+document.addEventListener("click",function(e){
+  const card=e.target.closest(".roster-clean-card");
+  if(!card || e.target.closest(".roster-clean-button")) return;
+  const page=card.dataset.page;
+  if(page && typeof showPage==="function") showPage(page);
+});
+</script>
 </body>
 </html>
